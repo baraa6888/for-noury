@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>I love you Norhan</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: #0f0f19;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+    }
+
+    #container {
+      position: relative;
+      text-align: center;
+      color: white;
+      z-index: 2;
+    }
+
+    #pressBtn {
+      display: none;
+      padding: 15px 30px;
+      font-size: 24px;
+      border: 2px solid white;
+      border-radius: 20px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #pressBtn:hover {
+      background: white;
+      color: #e62846;
+    }
+
+    #message {
+      font-size: 50px;
+      display: none;
+      color: #ff4d6d;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px #000;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 6s linear infinite;
+      opacity: 0.9;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <button id="pressBtn">Press here</button>
+    <div id="message">I love you Norhan ❤️</div>
+  </div>
+
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      document.body.appendChild(heart);
+
+      // حجم القلوب عشوائي عشان يبقى فيه تنوع
+      const size = Math.random() * 20 + 10; 
+      heart.style.width = size + "px";
+      heart.style.height = size + "px";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (2 + Math.random() * 4) + "s";
+
+      setTimeout(() => heart.remove(), 7000);
+    }
+    // تكثيف القلوب بشكل كبير (كل 70ms قلب جديد)
+    setInterval(createHeart, 70);
+
+    const btn = document.getElementById("pressBtn");
+    const msg = document.getElementById("message");
+    setTimeout(() => {
+      btn.style.display = "inline-block";
+    }, 3000);
+
+    btn.addEventListener("click", () => {
+      btn.style.display = "none";
+      msg.style.display = "block";
+    });
+  </script>
+</body>
+</html>
